@@ -1,0 +1,43 @@
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+    output = "/home/ubuntu/sistema-suporte-ti/node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  description String
+  requester   String
+  urgency     UrgencyLevel
+  category    TaskCategory
+  status      TaskStatus @default(PENDING)
+  createdAt   DateTime @default(now())
+  resolvedAt  DateTime?
+  updatedAt   DateTime @updatedAt
+
+  @@map("tasks")
+}
+
+enum UrgencyLevel {
+  URGENT
+  IMPORTANT
+  NOT_URGENT
+  NOT_IMPORTANT
+}
+
+enum TaskCategory {
+  EXPANSION
+  SUPPORT
+  MONITORING
+  CENTRAL_PROJECTS
+}
+
+enum TaskStatus {
+  PENDING
+  RESOLVED
+}
