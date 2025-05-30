@@ -3,6 +3,9 @@
     "workspaces": [
         "app"
     ],
+    "scripts": {
+        "dev": "npm run dev --workspace=app"
+    },
     "devDependencies": {
         "@next/swc-wasm-nodejs": "13.5.1",
         "@types/node": "20.6.2",
