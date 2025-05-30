@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -11,6 +10,7 @@ import {
   ClipboardList, 
   Plus, 
   CheckCircle,
+  Package,
   Menu,
   X
 } from 'lucide-react';
@@ -35,6 +35,11 @@ const navigationItems = [
     name: 'Demandas Resolvidas',
     href: '/tasks/resolved',
     icon: CheckCircle
+  },
+  {
+    name: 'Estoque',
+    href: '/inventory',
+    icon: Package
   }
 ];
 
@@ -44,7 +49,6 @@ export function Navigation() {
 
   return (
     <>
-      {/* Desktop Navigation */}
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -53,10 +57,9 @@ export function Navigation() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
             <div className="flex items-center">
               <Link href="/" className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center">
                   <ClipboardList className="h-5 w-5 text-white" />
                 </div>
                 <span className="text-xl font-bold text-gray-900">
@@ -65,7 +68,6 @@ export function Navigation() {
               </Link>
             </div>
 
-            {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-1">
               {navigationItems.map((item) => {
                 const Icon = item.icon;
@@ -77,7 +79,7 @@ export function Navigation() {
                       variant={isActive ? "default" : "ghost"}
                       className={`flex items-center space-x-2 px-4 py-2 transition-all duration-200 ${
                         isActive 
-                          ? 'bg-blue-600 text-white shadow-md' 
+                          ? 'bg-orange-600 text-white shadow-md hover:bg-orange-700' 
                           : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                       }`}
                     >
@@ -89,7 +91,6 @@ export function Navigation() {
               })}
             </div>
 
-            {/* Mobile Menu Button */}
             <div className="md:hidden">
               <Button
                 variant="ghost"
@@ -107,7 +108,6 @@ export function Navigation() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
@@ -131,7 +131,7 @@ export function Navigation() {
                       variant={isActive ? "default" : "ghost"}
                       className={`w-full justify-start space-x-2 ${
                         isActive 
-                          ? 'bg-blue-600 text-white' 
+                          ? 'bg-orange-600 text-white hover:bg-orange-700' 
                           : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                       }`}
                     >

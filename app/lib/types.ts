@@ -1,4 +1,3 @@
-
 export interface Task {
   id: string;
   description: string;
@@ -52,4 +51,52 @@ export interface UpdateTaskData {
   urgency?: UrgencyLevel;
   category?: TaskCategory;
   status?: TaskStatus;
+}
+
+// Inventory Types
+export interface InventoryItem {
+  id: string;
+  name: string;
+  category: InventoryCategory;
+  quantity: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export enum InventoryCategory {
+  KEYBOARD = 'KEYBOARD',
+  MOUSE = 'MOUSE',
+  MONITOR = 'MONITOR',
+  HEADSET = 'HEADSET',
+  WEBCAM = 'WEBCAM',
+  OTHER = 'OTHER'
+}
+
+export interface InventoryTransaction {
+  id: string;
+  itemId: string;
+  type: TransactionType;
+  quantity: number;
+  recipient?: string;
+  notes?: string;
+  createdAt: Date;
+}
+
+export enum TransactionType {
+  IN = 'IN',
+  OUT = 'OUT'
+}
+
+export interface CreateInventoryItemData {
+  name: string;
+  category: InventoryCategory;
+  quantity: number;
+}
+
+export interface CreateInventoryTransactionData {
+  itemId: string;
+  type: TransactionType;
+  quantity: number;
+  recipient?: string;
+  notes?: string;
 }

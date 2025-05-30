@@ -23,6 +23,31 @@ model Task {
   @@map("tasks")
 }
 
+model InventoryItem {
+  id          String   @id @default(cuid())
+  name        String
+  category    InventoryCategory
+  quantity    Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  transactions InventoryTransaction[]
+
+  @@map("inventory_items")
+}
+
+model InventoryTransaction {
+  id          String   @id @default(cuid())
+  itemId      String
+  type        TransactionType
+  quantity    Int
+  recipient   String?
+  notes       String?
+  createdAt   DateTime @default(now())
+  item        InventoryItem @relation(fields: [itemId], references: [id])
+
+  @@map("inventory_transactions")
+}
+
 enum UrgencyLevel {
   URGENT
   IMPORTANT
@@ -40,4 +65,18 @@ enum TaskCategory {
 enum TaskStatus {
   PENDING
   RESOLVED
+}
+
+enum InventoryCategory {
+  KEYBOARD
+  MOUSE
+  MONITOR
+  HEADSET
+  WEBCAM
+  OTHER
+}
+
+enum TransactionType {
+  IN
+  OUT
 }
